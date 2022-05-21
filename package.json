@@ -1,9 +1,23 @@
 {
+  "name": "adminjs",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "",
+  "main": "admin.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node admin.js"
+  },
+  "author": "",
+  "license": "ISC",
   "dependencies": {
-    "@adminjs/express": "^4.1.2",
-    "@adminjs/sequelize": "^2.1.5",
-    "adminjs": "^5.10.2",
+    "@adminjs/express": "^4.1.3",
+    "@adminjs/prisma": "^1.0.3",
+    "@carbon/icons-react": "^11.3.0",
+    "@prisma/client": "^3.14.0",
+    "adminjs": "^5.10.3",
     "express": "^4.18.1",
-    "express-formidable": "^1.2.0"
+    "express-formidable": "^1.2.0",
+    "nodemon": "^2.0.16"
   }
 }
