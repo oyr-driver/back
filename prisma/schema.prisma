@@ -8,14 +8,14 @@ datasource db {
 }
 
 model auth {
-  code    Int       @id
+  code    String    @id @db.VarChar(45)
   cdnm    String?   @db.VarChar(45)
   addDate DateTime? @db.DateTime(0)
   user    user[]
 }
 
 model call {
-  seq      Int       @id
+  seq      String    @id @db.VarChar(45)
   cntId    String?   @db.VarChar(45)
   phone    String?   @db.VarChar(45)
   sLat     String?   @db.VarChar(45)
@@ -35,9 +35,9 @@ model user {
   userId  String    @id @db.VarChar(30)
   userNm  String?   @db.VarChar(45)
   phone   String?   @db.VarChar(45)
-  authcd  Int       @default(autoincrement())
+  authcd  String?   @db.VarChar(45)
   addDate DateTime? @db.DateTime(0)
-  auth    auth      @relation(fields: [authcd], references: [code], onDelete: NoAction, onUpdate: NoAction, map: "authcode")
+  auth    auth?     @relation(fields: [authcd], references: [code], onDelete: NoAction, onUpdate: NoAction, map: "authcode")
   call    call[]
 
   @@index([authcd], map: "authcode_idx")
