@@ -16,6 +16,7 @@
     "@carbon/icons-react": "^11.3.0",
     "@prisma/client": "^3.14.0",
     "adminjs": "^5.10.3",
+    "body-parser": "^1.20.0",
     "express": "^4.18.1",
     "express-formidable": "^1.2.0",
     "nodemon": "^2.0.16"
