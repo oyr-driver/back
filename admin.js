@@ -3,6 +3,7 @@ import AdminJSExpress from "@adminjs/express";
 import express from "express";
 import { Database, Resource } from "@adminjs/prisma";
 import { PrismaClient } from "@prisma/client";
+import { apiRouter } from "./api/router";
 const PORT = process.env.port || 3000;
 export const prisma = new PrismaClient();
 //const prisma = new PrismaClient({ datasources: {  db: { url: "mysql://root:0000@localhost:3306/gooddrive" } } });
@@ -42,6 +43,7 @@ const run = async () => {
       }); 
     //const router = AdminJSExpress.buildRouter(adminJS);
     app.use(adminJS.options.rootPath, router);
+    app.use(apiRouter);
     app.listen(PORT, () => {
         console.log(`Example app listening at http://localhost:${PORT}`);
     });

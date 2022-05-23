@@ -2,7 +2,7 @@ const Axios = require('axios');
 const { NAVER_SMS_URL } = require('../const');
 const hmacSHA256 = require('crypto-js/hmac-sha256');
 
-const { SERVICE_URL, NCP_IAM_ACCESS_KEY }  = process.env;
+const { SERVICE_URL, NCP_IAM_ACCESS_KEY, NCP_IAM_SECRET_KEY }  = process.env;
 
 class NaverMessageService {
   ncpInstance = Axios.create({
@@ -16,7 +16,7 @@ class NaverMessageService {
   sendMessage(content, phoneNumber) {
     const body = this.buildSendMessageBody(content, phoneNumber);
     const payload = JSON.stringify(body);
-    const signature = this.buildSignature(payload, NCP_IAM_ACCESS_KEY);
+    const signature = this.buildSignature(payload, NCP_IAM_SECRET_KEY);
     console.log("🚀 ~ file: NaverMessageService.js ~ line 21 ~ NaverMessageService ~ sendMessage ~ signature", signature)
     const response = await this.ncpInstance.post("/", payload, {
       headers: {
