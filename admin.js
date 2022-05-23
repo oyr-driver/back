@@ -4,7 +4,7 @@ import express from "express";
 import { Database, Resource } from "@adminjs/prisma";
 import { PrismaClient } from "@prisma/client";
 const PORT = process.env.port || 3000;
-const prisma = new PrismaClient();
+export const prisma = new PrismaClient();
 //const prisma = new PrismaClient({ datasources: {  db: { url: "mysql://root:0000@localhost:3306/gooddrive" } } });
 AdminJS.registerAdapter({ Database, Resource });
 
