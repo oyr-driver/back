@@ -1,3 +1,3 @@
 export const CallStatusDict = {
-  LocationSubmit: "locaiton-submit",
+  LocationSubmit: "location-submit",
 }

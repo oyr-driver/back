@@ -8,35 +8,35 @@ datasource db {
 }
 
 model auth {
-  code    String    @id @db.VarChar(45)
+  code    Int       @id @default(autoincrement())
   cdnm    String?   @db.VarChar(45)
-  addDate DateTime? @db.DateTime(0)
+  addDate DateTime? @default(now()) @db.DateTime(0)
   user    user[]
 }
 
 model call {
-  seq      String    @id @db.VarChar(45)
-  cntId    String?   @db.VarChar(45)
-  phone    String?   @db.VarChar(45)
-  sLat     String?   @db.VarChar(45)
-  sLong    String?   @db.VarChar(45)
-  sAddr    String?   @db.VarChar(45)
-  eAddr    String?   @db.VarChar(45)
-  status   String?   @db.VarChar(45)
-  addrChk  String?   @db.VarChar(45)
-  callTime String?   @db.VarChar(45)
-  addDate  DateTime? @db.DateTime(0)
-  user     user?     @relation(fields: [addrChk], references: [userId], onDelete: NoAction, onUpdate: NoAction, map: "consultant")
+  seq     Int       @id @default(autoincrement())
+  cntid   Int?
+  phone   String    @db.VarChar(45)
+  sLat    Float?
+  sLong   Float?
+  sAddr   String?   @db.VarChar(200)
+  eAddr   String    @db.VarChar(200)
+  status  String    @db.VarChar(45)
+  addrChk String?   @db.VarChar(45)
+  addDate DateTime? @db.DateTime(0)
+  user    user?     @relation(fields: [cntid], references: [userId], onDelete: NoAction, onUpdate: NoAction, map: "consultant")
 
   @@index([addrChk], map: "consultant_idx")
+  @@index([cntid], map: "consultant_idx1")
 }
 
 model user {
-  userId  String    @id @db.VarChar(30)
+  userId  Int       @id @default(autoincrement())
   userNm  String?   @db.VarChar(45)
   phone   String?   @db.VarChar(45)
-  authcd  String?   @db.VarChar(45)
-  addDate DateTime? @db.DateTime(0)
+  authcd  Int?
+  addDate DateTime? @default(now()) @db.DateTime(0)
   auth    auth?     @relation(fields: [authcd], references: [code], onDelete: NoAction, onUpdate: NoAction, map: "authcode")
   call    call[]
 
