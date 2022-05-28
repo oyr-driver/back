@@ -4,7 +4,7 @@ const express = require("express");
 const { Database, Resource } = require("@adminjs/prisma");
 const {PrismaClient} = require("@prisma/client");
 const PORT = process.env.port || 3000;
-export const prisma = new PrismaClient();
+const prisma = new PrismaClient();
 
 AdminJS.registerAdapter({ Database, Resource });
 
