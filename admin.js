@@ -1,8 +1,8 @@
-import AdminJS from "adminjs";
-import AdminJSExpress from "@adminjs/express";
-import express from "express";
-import { Database, Resource } from "@adminjs/prisma";
-import {PrismaClient} from "@prisma/client";
+const AdminJS = require("adminjs");
+const AdminJSExpress = require("@adminjs/express");
+const express = require("express");
+const { Database, Resource } = require("@adminjs/prisma");
+const {PrismaClient} = require("@prisma/client");
 const PORT = process.env.port || 3000;
 export const prisma = new PrismaClient();
 
