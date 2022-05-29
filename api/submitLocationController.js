@@ -1,7 +1,7 @@
 const { prisma } = require('../admin');
 const { CallStatusDict } = require('./dict');
 
-export function submitLocationController(req, res) {
+exports.submitLocationController = async function (req, res) {
   const { id } = req.params;
   console.log("🚀 ~ file: submitLocationController.js ~ line 6 ~ submitLocationController ~ id", id)
   const { lat, lon, addr } = req.body;

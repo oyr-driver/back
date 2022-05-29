@@ -1,1 +1,1 @@
-export const NAVER_SMS_URL = "https://sens.apigw.ntruss.com/sms/v2";
+exports.NAVER_SMS_URL = "https://sens.apigw.ntruss.com/sms/v2";

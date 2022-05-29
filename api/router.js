@@ -8,3 +8,4 @@ apiRouter.use(bodyParser.json());
 apiRouter.post('/calls/:id/send-message', sendMessageController);
 apiRouter.post("/calls/:id/submit-location", submitLocationController);
 
+exports.apiRouter = apiRouter;
