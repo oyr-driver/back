@@ -2,8 +2,8 @@ const { buildErrorDto, NaverMessageSendError } = require("./error");
 const { naverMessageService } = require("./NaverMessageService");
 const { prisma } = require("../prisma");
 
-exports.sendMessageController = async function (req, res) {
-  let { id } = req.params;
+exports.sendMessageController = async function (req, res, data) {
+  let { id } = data.record.params.seq;
 
   // 1. 예외처리
   if (typeof id !== "string") {
@@ -77,3 +77,4 @@ const sendMessageService = async function (id) {
   }
   return result;
 };
+exports.sendMessageService = sendMessageService;
