@@ -1,3 +1,3 @@
-export const CallStatusDict = {
+exports.CallStatusDict = {
   LocationSubmit: "location-submit",
 }

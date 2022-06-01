@@ -1,4 +1,13 @@
-export class NaverMessageSendError extends Error {
+function buildErrorDto(status, err) {
+  return {
+    status,
+    message: err.message,
+    name: err.name,
+  };
+}
+exports.buildErrorDto = buildErrorDto;
+
+exports.NaverMessageSendError = class NaverMessageSendError extends Error {
   constructor(message) {
     super(message);
     this.name = "NaverMessageSendError";
@@ -7,12 +16,4 @@ export class NaverMessageSendError extends Error {
   toDto(status) {
     return buildErrorDto(status, this);
   }
-}
-
-export function buildErrorDto(status, err) {
-  return {
-    status,
-    message: err.message,
-    name: err.name,
-  };
-}
+};
