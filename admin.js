@@ -7,6 +7,7 @@ const { Database, Resource } = require("@adminjs/prisma");
 const PORT = process.env.port || 3010;
 const { apiRouter } = require("./api/router");
 const { prisma } = require("./prisma");
+const cors = require("cors");
 
 AdminJS.registerAdapter({ Database, Resource });
 
@@ -78,6 +79,7 @@ const run = async () => {
   //     cookiePassword: 'testtest'
   //   }); 
 
+  app.use(cors());
   const router = AdminJSExpress.buildRouter(adminJS);
   app.use(adminJS.options.rootPath, router);
   app.use("/api", apiRouter);
