@@ -1,17 +1,29 @@
-const { prisma } = require('../admin');
+const { CalculatorCheck } = require('@carbon/icons-react');
+const { LetterCc } = require('@carbon/icons-react');
+const { prisma } = require('../prisma');
 const { CallStatusDict } = require('./dict');
 
-export function submitLocationController(req, res) {
-  const { id } = req.params;
+exports.submitLocationController = async function (req, res) {
+  let { id } = req.params;
   console.log("🚀 ~ file: submitLocationController.js ~ line 6 ~ submitLocationController ~ id", id)
   const { lat, lon, addr } = req.body;
   console.log("🚀 ~ file: submitLocationController.js ~ line 8 ~ submitLocationController ~ req.body", req.body)
+
+  try {
+    id = parseInt(id);
+    if(isNaN(id)) {
+      throw new Error();
+    }
+  }
+  catch(err) {
+    return res.status(400).send("id is not valid number");
+  }
 
   let call;
   try {
     call = await prisma.call.findUnique({
       where: {
-        id,
+        seq: id,
       },
     });
   } catch (err) {
@@ -32,7 +44,7 @@ export function submitLocationController(req, res) {
   try {
     await prisma.call.update({
       where: {
-        id,
+        seq: id,
       },
       data: call,
     });
