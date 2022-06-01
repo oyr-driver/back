@@ -4,7 +4,7 @@ const AdminJS = require("adminjs");
 const AdminJSExpress = require("@adminjs/express");
 const express = require("express");
 const { Database, Resource } = require("@adminjs/prisma");
-const PORT = process.env.port || 3000;
+const PORT = process.env.port || 3010;
 const { apiRouter } = require("./api/router");
 const { prisma } = require("./prisma");
 
@@ -25,19 +25,37 @@ const run = async () => {
         {resource:{model:dmmf.call, client:prisma},
           options:{ //call에 send Message 액션 추가
             actions:{
-              list, edit, new:{
+              show:{
                 showInDrawer:true,
               },
-              newAction:{
-                name:'send Message',
+              edit:{
+                showInDrawer:true,
+              },
+              new:{
+                showInDrawer:true,
+              },
+              sendmessage:{
+                name:'sendmessage',
                 actionType: 'record',
                 isVisible: true,
                 icon:'Edit',
-                handler: () => {},
+                handler: async(request, response, data) => {
+                  const { record, resource, currentAdmin, h, translateMessage } = data;
+                  console.log(record.params);
+  
+                  return {
+                    record: record.toJSON(currentAdmin),
+                    redirectUrl: h.resourceUrl({ resourceId: resource._decorated?.id() || resource.id() }),
+                    notice: {
+                      message: translateMessage('successfullySendMessage', resource.id()),
+                      type: 'success',
+                    },
+                  }
+                },
                 component: false,
               }
             }
-          }
+          },
         },
         {resource:{model:dmmf.user, client:prisma},
           options:{}
@@ -62,6 +80,7 @@ const run = async () => {
 
   const router = AdminJSExpress.buildRouter(adminJS);
   app.use(adminJS.options.rootPath, router);
+  app.use("/api", apiRouter);
   app.listen(PORT, () => {
       console.log(`Example app listening at http://localhost:${PORT}`);
   });
