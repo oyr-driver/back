@@ -90,9 +90,7 @@ class NaverMessageService {
   }
 
   buildContent(url) {
-    return `안녕하세요. 굳드(good driver)입니다.
-    링크에 접속해서 현재 위치를 기사에게 알려주세요.
-    (${url})`;
+    return `*대리운전 위치전송: ${url}`;
   }
 
   buildUrl(callId) {

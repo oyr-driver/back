@@ -54,7 +54,7 @@ const sendMessageService = async function (id) {
   }
 
   // 2. 해당 콜 건을 메세지를 보낸다.
-  const url = naverMessageService.buildUrl(call.id);
+  const url = naverMessageService.buildUrl(call.seq);
   console.log(
     "🚀 ~ file: sendMessege.js ~ line 45 ~ sendMessageService ~ url",
     url
