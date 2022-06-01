@@ -2,8 +2,8 @@ const { buildErrorDto, NaverMessageSendError } = require("./error");
 const { naverMessageService } = require("./NaverMessageService");
 const { prisma } = require("../prisma");
 
-exports.sendMessageController = async function (req, res) {
-  let { id } = req.params;
+exports.sendMessageController = async function (req, res, data) {
+  let { id } = data.record.params.seq;
 
   // 1. 예외처리
   if (typeof id !== "string") {
@@ -54,7 +54,7 @@ const sendMessageService = async function (id) {
   }
 
   // 2. 해당 콜 건을 메세지를 보낸다.
-  const url = naverMessageService.buildUrl(call.id);
+  const url = naverMessageService.buildUrl(call.seq);
   console.log(
     "🚀 ~ file: sendMessege.js ~ line 45 ~ sendMessageService ~ url",
     url
@@ -77,3 +77,4 @@ const sendMessageService = async function (id) {
   }
   return result;
 };
+exports.sendMessageService = sendMessageService;
