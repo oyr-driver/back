@@ -1,0 +1,44 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model auth {
+  code    Int       @id @default(autoincrement())
+  cdnm    String?   @db.VarChar(45)
+  addDate DateTime? @default(now()) @db.DateTime(0)
+  user    user[]
+}
+
+model call {
+  seq     Int       @id @default(autoincrement())
+  cntid   Int?
+  phone   String    @db.VarChar(45)
+  sLat    Float?
+  sLong   Float?
+  sAddr   String?   @db.VarChar(200)
+  eAddr   String    @db.VarChar(200)
+  status  String    @db.VarChar(45)
+  addrChk String?   @db.VarChar(45)
+  addDate DateTime? @db.DateTime(0)
+  user    user?     @relation(fields: [cntid], references: [userId], onDelete: NoAction, onUpdate: NoAction, map: "consultant")
+
+  @@index([addrChk], map: "consultant_idx")
+  @@index([cntid], map: "consultant_idx1")
+}
+
+model user {
+  userId  Int       @id @default(autoincrement())
+  userNm  String?   @db.VarChar(45)
+  phone   String?   @db.VarChar(45)
+  authcd  Int?
+  addDate DateTime? @default(now()) @db.DateTime(0)
+  auth    auth?     @relation(fields: [authcd], references: [code], onDelete: NoAction, onUpdate: NoAction, map: "authcode")
+  call    call[]
+
+  @@index([authcd], map: "authcode_idx")
+}

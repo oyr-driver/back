@@ -1,0 +1,1 @@
+exports.NAVER_SMS_BASE_URL = "https://sens.apigw.ntruss.com";
