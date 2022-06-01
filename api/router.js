@@ -6,6 +6,6 @@ const { submitLocationController } = require('./submitLocationController');
 const apiRouter = express.Router();
 apiRouter.use(bodyParser.json());
 apiRouter.post('/calls/:id/send-message', sendMessageController);
-apiRouter.post("/calls/:id/submit-location", submitLocationController);
+apiRouter.post("/calls/:id/location/submit", submitLocationController);
 
 exports.apiRouter = apiRouter;
