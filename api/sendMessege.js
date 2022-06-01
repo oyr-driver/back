@@ -23,8 +23,10 @@ exports.sendMessageController = async function (req, res) {
     // 2. 해당하는 콜이 없는경우
 
     // 3. 그 외...
-    res.status(500).send(buildErrorDto(500, err));
+    return res.status(500).send(buildErrorDto(500, err));
   }
+
+  return res.send("ok");
 };
 
 const sendMessageService = async function (id) {

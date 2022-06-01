@@ -7,7 +7,6 @@ const { Database, Resource } = require("@adminjs/prisma");
 const PORT = process.env.port || 3000;
 const { apiRouter } = require("./api/router");
 const { prisma } = require("./prisma");
-console.log(process.env);
 
 AdminJS.registerAdapter({ Database, Resource });
 

@@ -4,6 +4,7 @@ const CryptoJS = require("crypto-js");
 
 const {
   SERVICE_URL,
+  FROM_PHONE_NUMBER,
   NCP_IAM_ACCESS_KEY,
   NCP_IAM_SECRET_KEY,
   NCP_SNS_SERVICE_ID,
@@ -48,11 +49,7 @@ class NaverMessageService {
       );
       throw err;
     }
-
-    console.log(
-      "🚀 ~ file: NaverMessageService.js ~ line 29 ~ NaverMessageService ~ sendMessage ~ response",
-      response
-    );
+    console.log("🚀 ~ file: NaverMessageService.js ~ line 53 ~ NaverMessageService ~ sendMessage ~ response.data", response.data)
     return response.data;
   }
 
@@ -60,7 +57,7 @@ class NaverMessageService {
     var space = " "; // one space
     var newLine = "\n"; // new line
     var method = "POST"; // method
-    var url = this.buildSmsSendUrl();
+    var url = "/sms/v2/services/ncp:sms:kr:286374326793:goodde/messages";
 
     var hmac = CryptoJS.algo.HMAC.create(CryptoJS.algo.SHA256, secretKey);
     hmac.update(method);
@@ -81,7 +78,7 @@ class NaverMessageService {
       type: "SMS",
       contentType: "COMM",
       countryCode: "82",
-      from: "string",
+      from: FROM_PHONE_NUMBER,
       content,
       messages: [
         {
