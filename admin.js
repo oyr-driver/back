@@ -1,11 +1,13 @@
+require("dotenv").config();
+
 const AdminJS = require("adminjs");
 const AdminJSExpress = require("@adminjs/express");
 const express = require("express");
 const { Database, Resource } = require("@adminjs/prisma");
-const {PrismaClient} = require("@prisma/client");
 const PORT = process.env.port || 3000;
-const prisma = new PrismaClient();
-//export
+const { apiRouter } = require("./api/router");
+const { prisma } = require("./prisma");
+
 AdminJS.registerAdapter({ Database, Resource });
 
 const run = async () => {
@@ -73,6 +75,5 @@ const run = async () => {
   });
 };
 run().finally(async () => {
- await prisma.$disconnect();
+  await prisma.$disconnect();
 });
-
